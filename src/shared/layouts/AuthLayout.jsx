@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
+import { logo } from "../../assets";
 
 export default function AuthLayout() {
-
-
     return (
         <div
-        className="flex h-screen"
+        className="relative flex h-screen"
         >
+            <div className="hidden absolute z-20 top-4 left-4 sm:flex items-center gap-2">
+                <img src={logo} alt="Logo eletron" width={30} height={30}/>
+                <span className="text-primary">Electron</span>
+            </div>  
             <div
-            className="z-10 sm:bg-transparent sm:backdrop-blur-none flex justify-center items-center w-full p-8 sm:p-2 sm:w-2/5 h-100"
+             className="z-10 sm:bg-transparent sm:backdrop-blur-none flex justify-center items-center w-full p-9 sm:p-2 sm:w-2/5 h-100"
             >
                 <Outlet/>
             </div>
@@ -19,7 +22,7 @@ export default function AuthLayout() {
                 className="flex items-end h-full bg-auth bg-cover rounded-lg p-8"
                 >
                     <div
-                    className="backdrop-blur-md w-full shadow-md sm:p-2 bg-white/10 rounded-sm"
+                    className="backdrop-blur-md w-full shadow-md sm:p-4 bg-white/10 rounded-sm"
                     >
                         <h2 className="text-3xl hidden sm:block text-white font-bold">Manage your shop</h2>
                     </div>

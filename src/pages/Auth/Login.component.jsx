@@ -8,6 +8,9 @@ import { faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { toast } from "react-toastify"
 import { Link } from "react-router-dom"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { useDispatch } from "react-redux"
+import { authLoginThunk } from "../../stores/actions/authAction"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
     const schema = y.object({
@@ -16,11 +19,14 @@ export default function Login() {
     })
 
     const [isShow, setIsShow] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const {
         handleSubmit,
         register,
         formState: {errors, isValid},
+        reset
     } = useForm({
         defaultValues: {
             email: "",
@@ -30,9 +36,16 @@ export default function Login() {
         mode: "onSubmit"
     })
 
-    const onSubmit = (data) => {
-        console.log(data)
-        toast.success("Login successfully")
+    const onSubmit = async (data) => {
+        const {payload} = await dispatch(authLoginThunk(data))
+        if(payload.statusCode == 200){
+            toast.success(payload.message)
+            navigate("/")
+        }else{
+            toast.error(payload)
+        }
+
+        reset()
     }
 
     return (
@@ -45,10 +58,11 @@ export default function Login() {
                 <div className="mb-3">
                     <label htmlFor="email" className="block mb-1 text-sm text-gray-500">E-Mail</label>
                     <input
-                    type="email" 
-                    {...register("email")}
-                    id="email"
-                    className="w-full border rounded-md border-black/20 p-2 outline-primary"
+                     type="email" 
+                     {...register("email")}
+                     id="email"
+                     className="w-full border rounded-md border-black/20 p-2 outline-primary"
+                     autoComplete="off"
                     />
                     {errors.email?.message && (
                         <span className="text-xs text-red-400">{errors.email.message}</span>
@@ -58,10 +72,11 @@ export default function Login() {
                     <label htmlFor="password" className="block mb-1 text-sm text-gray-500">Password</label>
                     <div className="relative flex justify-end">
                         <input
-                        type={ isShow ? "text" : "password" }
-                        {...register("password")}
-                        id="password"
-                        className="w-full border rounded-md border-black/20 p-2 outline-primary"
+                         type={ isShow ? "text" : "password" }
+                         {...register("password")}
+                         id="password"
+                         className="w-full border rounded-md border-black/20 p-2 outline-primary"
+                         autoComplete="off"
                         />
                         <FontAwesomeIcon
                          onClick={( () => setIsShow(!isShow))}
@@ -78,7 +93,7 @@ export default function Login() {
                         Log In
                     </button>
                     <span className="text-primary text-sm">Forgot Password</span>
-                    <Link className="text-primary text-sm" to={"/auth/register"}>Don{"'"}t have an account? Regitser <FontAwesomeIcon icon={faArrowRight}/></Link>
+                    <Link className="text-primary text-sm" to={"/auth/register"}>Don{"'"}t have an account? Register <FontAwesomeIcon icon={faArrowRight}/></Link>
                 </div>
             </form>
         </div>
