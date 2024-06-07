@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#2196f3",
+        blackCustom: "#32353f",
+        whiteCustomer: "#f9fcfc"
+      },
+      fontFamily: {
+        "nunito": "Nunito, sans-serif"
+      }
+    },
   },
   plugins: [],
 }

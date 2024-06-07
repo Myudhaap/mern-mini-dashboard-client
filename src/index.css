@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+@layer base{
+  *,*::after,*::before{
+    @apply font-nunito
+  }
+  
+  body{
+    @apply font-nunito
+  }
+}
+
+.bg-auth{
+  background-image:  repeating-radial-gradient(circle at 0 0, transparent 0, #2a92d8 100px), repeating-linear-gradient(#1ba4ff, #1ba4ff);
+  background-color: #2a92d8;
+}
