@@ -97,7 +97,6 @@ export default function ProductForm() {
     }
 
     const onHandleSubmit = async (data) => {
-        console.log(data)
         if(!data.id){
             const {id, image: file, ...createData} = data
             

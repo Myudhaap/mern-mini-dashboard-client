@@ -5,6 +5,7 @@ import MainLayout from "../shared/Layouts/MainLayout";
 import { Dashboard } from "../pages/Dashboard";
 import { Category, CategoryForm } from "../pages/Category";
 import { Product, ProductForm } from "../pages/Product";
+import NotFound from "../shared/NotFound/NotFound";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
                 Component: Register
             }
         ]
+    },
+    {
+        path: "*",
+        Component: NotFound
     }
 ])
 

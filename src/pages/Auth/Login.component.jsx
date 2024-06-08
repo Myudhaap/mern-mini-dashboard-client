@@ -53,7 +53,7 @@ export default function Login() {
             <h2 className="text-blackCustom font-bold text-2xl mb-8">HI, NICE TO SEE YOU</h2>
             <form
              onSubmit={handleSubmit(onSubmit)}
-            className="w-full"
+             className="w-full"
             >
                 <div className="mb-3">
                     <label htmlFor="email" className="block mb-1 text-sm text-gray-500">E-Mail</label>

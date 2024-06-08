@@ -11,9 +11,33 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Profile } from "../components/Profile";
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import electronInstance from "../../api/electronInstance";
+import { useNavigate } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
 
 export default function MainLayout() {
+    const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(true)
     const [isCollapse, setIsCollapse] = useState(false)
+
+    const verifyToken = async () => {
+        try{
+            await electronInstance.get("auth/verify")
+            setIsLoading(false)
+        }catch(e){
+            setIsLoading(false)
+            navigate("/auth/signin")
+        }
+    }
+    
+    useEffect(() => {
+        verifyToken()
+    }, [])
+    
+    if(isLoading) return <Loading/>
+    
     return (
         <div className="flex h-screen">
             <Sidebar
@@ -35,8 +59,11 @@ export default function MainLayout() {
                         </SubMenu>
                     </Menu>
 
-                    <Menu className="mt-auto">
-                        <MenuItem component={<Link to={"/auth/signin"}/>} icon={<FontAwesomeIcon icon={faSignOut}/>}>Log Out</MenuItem>
+                    <Menu className="mt-auto w-full">
+                        <MenuItem className="w-full" component={<span className="w-full" onClick={() => {
+                            localStorage.removeItem("token")
+                            navigate("/auth/signin")
+                        }}/>} icon={<FontAwesomeIcon icon={faSignOut}/>}>Log Out</MenuItem>
                     </Menu>
                 </div>
             </Sidebar>

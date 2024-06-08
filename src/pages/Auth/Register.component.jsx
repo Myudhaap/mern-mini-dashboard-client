@@ -52,7 +52,7 @@ export default function Register() {
         const {payload} = await dispatch(authRegisterThunk(data))
         if(payload.statusCode == 201){
             toast.success(payload.message)
-            navigate("/auth/login")
+            navigate("/auth/signin")
         }else{
             toast.error("Failed register user")
         }

@@ -1,7 +1,37 @@
 import { Outlet } from "react-router-dom";
 import { logo } from "../../assets";
+import { useEffect } from "react";
+import electronInstance from "../../api/electronInstance";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Loading from "../components/Loading/Loading";
 
 export default function AuthLayout() {
+    const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    const verifyToken = async () => {
+        const token = localStorage.getItem("token")
+
+        if(token){
+            try{
+                await electronInstance.get("auth/verify")
+                setIsLoading(false)
+                navigate("/")            
+            }catch(e){
+                setIsLoading(false)
+            }
+        }
+        setIsLoading(false)
+    }
+    
+    useEffect(() => {
+        verifyToken()
+    }, [])
+
+    if(isLoading) return <Loading/>
+
     return (
         <div
         className="relative flex h-screen"

@@ -27,7 +27,6 @@ const categoryService = () => {
         }
     */
     const create = async (payload) => {
-        console.log(payload)
         try{
             const res = await electronInstance.post("/categories", payload);
 
