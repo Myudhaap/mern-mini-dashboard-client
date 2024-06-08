@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import AuthLayout from "../shared/Layouts/AuthLayout";
+import AuthLayout from "../shared/layouts/AuthLayout";
 import { Login, Register } from "../pages/Auth";
-import MainLayout from "../shared/Layouts/MainLayout";
+import MainLayout from "../shared/layouts/MainLayout";
 import { Dashboard } from "../pages/Dashboard";
 import { Category, CategoryForm } from "../pages/Category";
 import { Product, ProductForm } from "../pages/Product";
