@@ -24,10 +24,6 @@ const categoryService = () => {
     /*
         PAYLOAD = {
             name string
-            description string
-            price int
-            image file
-            categoryId string
         }
     */
     const create = async (payload) => {
@@ -45,10 +41,6 @@ const categoryService = () => {
         PAYLOAD = {
             id string
             name string
-            description string
-            price int
-            image file
-            categoryId string
         }
     */
     const update = async (payload) => {

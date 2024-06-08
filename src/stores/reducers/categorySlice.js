@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getAllCategoryThunk, getByIdCategoryThunk } from "../actions/categoryAction"
+import { createCategoryThunk, deleteCategoryThunk, getAllCategoryThunk, getByIdCategoryThunk, updateCategoryThunk } from "../actions/categoryAction"
 
 const initialState = {
     categories: [],
@@ -46,6 +46,45 @@ export const categorySlice = createSlice({
             state.category = payload.data
         })
         builder.addCase(getByIdCategoryThunk.rejected, (state, {payload}) => {
+            state.isLoading = false
+            state.message = payload
+        })
+
+        builder.addCase(createCategoryThunk.pending, (state) => {
+            state.isLoading = true
+            state.message = ""
+        })
+        builder.addCase(createCategoryThunk.fulfilled, (state, {payload}) => {
+            state.isLoading = false
+            state.message = payload.message
+        })
+        builder.addCase(createCategoryThunk.rejected, (state, {payload}) => {
+            state.isLoading = false
+            state.message = payload
+        })
+
+        builder.addCase(updateCategoryThunk.pending, (state) => {
+            state.isLoading = true
+            state.message = ""
+        })
+        builder.addCase(updateCategoryThunk.fulfilled, (state, {payload}) => {
+            state.isLoading = false
+            state.message = payload.message
+        })
+        builder.addCase(updateCategoryThunk.rejected, (state, {payload}) => {
+            state.isLoading = false
+            state.message = payload
+        })
+
+        builder.addCase(deleteCategoryThunk.pending, (state) => {
+            state.isLoading = true
+            state.message = ""
+        })
+        builder.addCase(deleteCategoryThunk.fulfilled, (state, {payload}) => {
+            state.isLoading = false
+            state.message = payload.message
+        })
+        builder.addCase(deleteCategoryThunk.rejected, (state, {payload}) => {
             state.isLoading = false
             state.message = payload
         })

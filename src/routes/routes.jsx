@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import AuthLayout from "../shared/layouts/AuthLayout";
+import AuthLayout from "../shared/Layouts/AuthLayout";
 import { Login, Register } from "../pages/Auth";
-import MainLayout from "../shared/layouts/MainLayout";
+import MainLayout from "../shared/Layouts/MainLayout";
 import { Dashboard } from "../pages/Dashboard";
 import { Category, CategoryForm } from "../pages/Category";
+import { Product, ProductForm } from "../pages/Product";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,23 @@ const router = createBrowserRouter([
                     {
                         path: "form/:id",
                         Component: CategoryForm
+                    }
+                ]
+            },
+            {
+                path: "products",
+                children: [
+                    {
+                        index: true,
+                        Component: Product,
+                    },
+                    {
+                        path: "form",
+                        Component: ProductForm
+                    },
+                    {
+                        path: "form/:id",
+                        Component: ProductForm
                     }
                 ]
             }

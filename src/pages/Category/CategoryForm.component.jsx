@@ -15,11 +15,14 @@ import { createCategoryThunk, getByIdCategoryThunk, updateCategoryThunk } from "
 import { toast } from "react-toastify"
 import { useCallback } from "react"
 import { clearCategory } from "../../stores/reducers/categorySlice"
+import { useSelector } from "react-redux"
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 
 export default function CategoryForm() {
     const {id} = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {isLoading} = useSelector(state => state.category)
 
     const schema = y.object({
         id: y.string().nullable(),
@@ -122,9 +125,9 @@ export default function CategoryForm() {
                     <button
                      type="submit"
                      className="px-4 disabled:cursor-not-allowed disabled:bg-primary/70 bg-primary hover:bg-primary/95 transition-colors duration-150 text-white font-semibold p-2 rounded-md"
-                     disabled={!isValid}
+                     disabled={!isValid || isLoading}
                     >
-                        <FontAwesomeIcon icon={faFloppyDisk} className="me-2"/>
+                        <FontAwesomeIcon icon={isLoading ? faSpinner : faFloppyDisk} spin={isLoading} className="me-2"/>
                         Submit
                     </button>
                     <button
