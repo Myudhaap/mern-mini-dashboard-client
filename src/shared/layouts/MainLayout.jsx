@@ -10,6 +10,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Profile } from "../components/Profile";
+import { Outlet } from "react-router-dom";
 
 export default function MainLayout() {
     const [isCollapse, setIsCollapse] = useState(false)
@@ -49,8 +50,8 @@ export default function MainLayout() {
                     </span>
                     <Profile/>
                 </header>
-                <main className="flex-1">
-
+                <main className="flex-1 p-4">
+                    <Outlet/>
                 </main>
             </div>
         </div>
